@@ -1,0 +1,25 @@
+{
+  "name": "codex-insight",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "apps/server",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @codex-insight/core && concurrently -k \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev -w @codex-insight/server",
+    "dev:web": "npm run dev -w @codex-insight/web",
+    "build": "npm run build -w @codex-insight/core && npm run build -w @codex-insight/server && npm run build -w @codex-insight/web",
+    "build:hosted": "npm run build -w @codex-insight/core && npm run build:hosted -w @codex-insight/web",
+    "start": "npm run start -w @codex-insight/server",
+    "test": "tsx --test packages/core/test/core.test.ts apps/server/test/api.test.ts",
+    "scan": "tsx packages/core/src/cli.ts"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
